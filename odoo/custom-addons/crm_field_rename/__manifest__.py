@@ -2,16 +2,22 @@
     "name": "CRM Field Rename",
     "version": "1.0",
     "category": "Sales/CRM",
-    "summary": "Rename CRM fields",
+    "summary": "Add Hawk button to CRM",
     "description": """
-        This module renames the 'Generate leads' field to 'Generate happiness' in CRM.
+        This module adds a Hawk button next to the New button in CRM.
     """,
     "author": "Odoocker",
     "website": "https://odoocker.com",
-    "depends": ["crm"],
+    "depends": ["crm", "web"],
     "data": [
-        "views/crm_views.xml",
+        "views/crm_lead_views.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "crm_field_rename/static/src/js/hawk_button.js",
+        ],
+    },
+    "post_init_hook": "post_init_hook",
     "installable": True,
     "application": False,
     "auto_install": False,

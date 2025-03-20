@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Update the button label through a data function -->
+    <function model="ir.ui.menu" name="write">
+        <value model="ir.ui.menu" search="[('name', '=', 'Generate Leads')]"/>
+        <value eval="{'name': 'Generate Happiness'}"/>
+    </function>
+    <!-- Create a new action for the Hawk button -->
+    <record id="action_crm_hawk" model="ir.actions.act_window">
+        <field name="name">Hawk</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">form,kanban,tree</field>
+        <field name="domain">[('type', '=', 'lead')]</field>
+        <field name="context">{'default_type': 'lead'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new lead
+            </p>
+        </field>
+    </record>
+    
+    <!-- Create a menu item for Hawk next to the New menu -->
+    <menuitem id="menu_crm_hawk" 
+              name="Hawk"
+              parent="crm.crm_menu_root" 
+              action="action_crm_hawk"
+              sequence="1"/>
+</odoo> 
