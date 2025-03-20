@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Update the button label through a data function -->
-    <function model="ir.ui.menu" name="write">
-        <value model="ir.ui.menu" search="[('name', '=', 'Generate Leads')]"/>
-        <value eval="{'name': 'Generate Happiness'}"/>
-    </function>
-    <!-- Create a new action for the Hawk button -->
+    <!-- Create a new action for the Hawk Tuah button -->
     <record id="action_crm_hawk" model="ir.actions.act_window">
-        <field name="name">Hawk</field>
+        <field name="name">Hawk Tuah</field>
         <field name="res_model">crm.lead</field>
         <field name="view_mode">form,kanban,tree</field>
         <field name="domain">[('type', '=', 'lead')]</field>
@@ -19,9 +14,9 @@
         </field>
     </record>
     
-    <!-- Create a menu item for Hawk next to the New menu -->
+    <!-- Create a menu item for Hawk Tuah next to the New menu -->
     <menuitem id="menu_crm_hawk" 
-              name="Hawk"
+              name="Hawk Tuah"
               parent="crm.crm_menu_root" 
               action="action_crm_hawk"
               sequence="1"/>

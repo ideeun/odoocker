@@ -1,14 +1,14 @@
 {
-    "name": "CRM Field Rename",
+    "name": "CRM Hawk Tuah Button",
     "version": "1.0",
     "category": "Sales/CRM",
-    "summary": "Add Hawk button to CRM",
+    "summary": "Add Hawk Tuah button to CRM",
     "description": """
-        This module adds a Hawk button next to the New button in CRM.
+        This module adds a Hawk Tuah button next to the New button in CRM.
     """,
     "author": "Odoocker",
     "website": "https://odoocker.com",
-    "depends": ["crm", "web"],
+    "depends": ["crm"],
     "data": [
         "views/crm_lead_views.xml",
     ],
