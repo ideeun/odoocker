@@ -17,7 +17,6 @@
             "crm_field_rename/static/src/js/hawk_button.js",
         ],
     },
-    "post_init_hook": "post_init_hook",
     "installable": True,
     "application": False,
     "auto_install": False,

@@ -2,7 +2,7 @@
 <odoo>
     <!-- Create a new action for the Hawk Tuah button -->
     <record id="action_crm_hawk" model="ir.actions.act_window">
-        <field name="name">Button from new module</field>
+        <field name="name">Hawk Tuah</field>
         <field name="res_model">crm.lead</field>
         <field name="view_mode">form,kanban,tree</field>
         <field name="domain">[('type', '=', 'lead')]</field>
@@ -16,7 +16,7 @@
     
     <!-- Create a menu item for Hawk Tuah next to the New menu -->
     <menuitem id="menu_crm_hawk" 
-              name="Button from new module"
+              name="Hawk Tuah"
               parent="crm.crm_menu_root" 
               action="action_crm_hawk"
               sequence="1"/>

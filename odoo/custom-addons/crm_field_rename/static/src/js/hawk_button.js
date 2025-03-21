@@ -5,13 +5,13 @@ odoo.define("crm_field_rename.hawk_button", function (require) {
   var ListView = require("web.ListView");
   var KanbanView = require("web.KanbanView");
 
-  // Add Hawk button to list view
+  // Add Hawk Tuah button to list view
   ListView.include({
     renderButtons: function () {
       this._super.apply(this, arguments);
       if (this.modelName === "crm.lead") {
         var $hawkButton = $(
-          '<button class="btn btn-primary" type="button">Hawk</button>'
+          '<button class="btn btn-primary" type="button">Hawk Tuah</button>'
         );
         this.$buttons.find(".o_list_button_add").after($hawkButton);
 
@@ -21,18 +21,18 @@ odoo.define("crm_field_rename.hawk_button", function (require) {
 
     _onHawkButtonClick: function (ev) {
       ev.preventDefault();
-      alert("Hawk button clicked!");
+      alert("Hawk Tuah button clicked!");
       // You can add more functionality here
     },
   });
 
-  // Add Hawk button to kanban view
+  // Add Hawk Tuah button to kanban view
   KanbanView.include({
     renderButtons: function () {
       this._super.apply(this, arguments);
       if (this.modelName === "crm.lead") {
         var $hawkButton = $(
-          '<button class="btn btn-primary" type="button">Hawk</button>'
+          '<button class="btn btn-primary" type="button">Hawk Tuah</button>'
         );
         this.$buttons.find(".o-kanban-button-new").after($hawkButton);
 
@@ -42,7 +42,7 @@ odoo.define("crm_field_rename.hawk_button", function (require) {
 
     _onHawkButtonClick: function (ev) {
       ev.preventDefault();
-      alert("Hawk button clicked!");
+      alert("Hawk Tuah button clicked!");
       // You can add more functionality here
     },
   });
