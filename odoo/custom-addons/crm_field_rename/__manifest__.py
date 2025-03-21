@@ -8,13 +8,13 @@
     """,
     "author": "Odoocker",
     "website": "https://odoocker.com",
-    "depends": ["crm"],
+    "depends": ["crm", "web"],
     "data": [
         "views/crm_lead_views.xml",
     ],
     "assets": {
         "web.assets_backend": [
-            "crm_field_rename/static/src/js/hawk_button.js",
+            "/crm_field_rename/static/src/js/hawk_button.js",
         ],
     },
     "installable": True,

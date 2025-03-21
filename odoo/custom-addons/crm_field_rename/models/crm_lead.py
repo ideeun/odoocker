@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, fields, models
 
 
 class CrmLead(models.Model):
@@ -15,4 +15,20 @@ class CrmLead(models.Model):
             "res_model": "crm.lead",
             "view_mode": "form,kanban,tree",
             "target": "current",
+        }
+
+    def hawk_tuah_action(self):
+        """
+        This action will be triggered when the Hawk Tuah button is clicked
+        """
+        self.ensure_one()
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Hawk Tuah",
+                "message": "Hawk Tuah button was clicked!",
+                "sticky": False,
+                "type": "success",
+            },
         }
