@@ -2,7 +2,14 @@
 
 set -e
 
-# Function to construct the clone command
+# Constructs the appropriate git clone command based on repository type
+#
+# Args:
+#   $1 (repo_type): Type of repository - 'private', 'enterprise', or 'public'
+#   $2 (repo_url): URL of the git repository to clone
+#
+# Returns:
+#   The constructed git clone command as a string with appropriate authentication
 construct_clone_command() {
     local repo_type=$1
     local repo_url=$2
@@ -13,7 +20,15 @@ construct_clone_command() {
     esac
 }
 
-# Function to clone and copy modules based on conditions
+# Clones a repository and copies specified modules based on conditions
+#
+# Args:
+#   $1 (repo_type): Type of repository - 'private', 'enterprise', or 'public'
+#   $2 (repo_url): URL of the git repository to clone
+#   $@ (modules_conditions): Array of alternating module names and boolean conditions
+#
+# Example:
+#   clone_and_copy_modules public "https://github.com/example/repo.git" "module1" true "module2" false
 clone_and_copy_modules() {
     local repo_type=$1
     local repo_url=$2
@@ -61,7 +76,17 @@ clone_and_copy_modules() {
     fi
 }
 
-# Function to manually expand environment variables in a string
+# Expands environment variables in a string, defaulting to 'false' if unset
+#
+# Args:
+#   $1: String containing environment variables in ${VAR} format
+#
+# Returns:
+#   String with all environment variables expanded
+#
+# Example:
+#   expand_env_vars "module1 ${USE_REDIS} module2 ${USE_S3}"
+#   -> "module1 true module2 false" (assuming USE_REDIS=true and USE_S3 unset)
 expand_env_vars() {
     while IFS=' ' read -r -a words; do
         for word in "${words[@]}"; do
@@ -82,10 +107,33 @@ expand_env_vars() {
     done <<< "$1"
 }
 
-# Read the configuration file and process each line
+# This section reads third-party-addons.txt line by line and:
+# 1. Creates directories for enterprise and third party addons if they don't exist
+# 2. Skips empty lines and comments (lines starting with #)
+# 3. For each valid line:
+#    - Expands any environment variables (e.g. ${USE_REDIS} -> true/false)
+#    - Calls clone_and_copy_modules with the expanded line to:
+#      a) Clone the git repo if needed
+#      b) Copy specified modules based on their conditions
+echo "
+#####################################################
+#                                                   #
+#           CLONING THIRD PARTY ADDONS             #
+#                                                   #
+#####################################################
+"
+
 while IFS= read -r line; do
     mkdir -p ${ENTERPRISE_ADDONS}
     mkdir -p ${THIRD_PARTY_ADDONS}
     [[ -z "$line" || "$line" == \#* ]] && continue
     clone_and_copy_modules $(expand_env_vars "$line")
 done < "third-party-addons.txt"
+
+echo "
+#####################################################
+#                                                   #
+#         FINISHED CLONING THIRD PARTY ADDONS       #
+#                                                   #
+#####################################################
+"
