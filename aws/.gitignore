@@ -1,0 +1,33 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files, which are likely to contain sensitive data
+*.tfvars
+*.tfvars.json
+
+# Ignore override files as they are usually used for local development
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include tfvars files that are safe to be checked in
+!example.tfvars
+
+# Include override files you do wish to add to version control
+!override.example.tf
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore CLI local state files
+.terraform.lock.hcl
