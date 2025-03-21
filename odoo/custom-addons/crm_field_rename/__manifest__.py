@@ -12,11 +12,11 @@
     "data": [
         "views/crm_lead_views.xml",
     ],
-    "assets": {
-        "web.assets_backend": [
-            "/crm_field_rename/static/src/js/hawk_button.js",
-        ],
-    },
+    # "assets": {
+    #     "web.assets_backend": [
+    #         "/crm_field_rename/static/src/js/hawk_button.js",
+    #     ],
+    # },
     "installable": True,
     "application": False,
     "auto_install": False,
