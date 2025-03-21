@@ -1,49 +1,56 @@
-odoo.define("crm_field_rename.hawk_button", function (require) {
-  "use strict";
+odoo.define(
+  "crm_field_rename.hawk_button",
+  ["@web/core/utils/hooks"],
+  function (hooks) {
+    "use strict";
 
-  var core = require("web.core");
-  var ListView = require("web.ListView");
-  var KanbanView = require("web.KanbanView");
+    const { Component, onMounted, useRef, xml } = owl;
 
-  // Add Hawk button to list view
-  ListView.include({
-    renderButtons: function () {
-      this._super.apply(this, arguments);
-      if (this.modelName === "crm.lead") {
-        var $hawkButton = $(
-          '<button class="btn btn-primary" type="button">Hawk</button>'
-        );
-        this.$buttons.find(".o_list_button_add").after($hawkButton);
+    class HawkButton extends Component {
+      setup() {
+        super.setup();
+        this.buttonRef = useRef("hawkButton");
 
-        $hawkButton.on("click", this._onHawkButtonClick.bind(this));
+        onMounted(() => {
+          // Find all CRM lead views and add the button
+          const addButton = () => {
+            // For list view
+            const listAddButton = document.querySelector(".o_list_button_add");
+            if (listAddButton && window.location.href.includes("crm.lead")) {
+              const hawkButton = document.createElement("button");
+              hawkButton.className = "btn btn-primary mx-1";
+              hawkButton.textContent = "Hawk Tuah";
+              hawkButton.onclick = () => alert("Hawk Tuah button clicked!");
+
+              if (!document.querySelector(".hawk-tuah-button")) {
+                hawkButton.classList.add("hawk-tuah-button");
+                listAddButton.parentNode.insertBefore(
+                  hawkButton,
+                  listAddButton.nextSibling
+                );
+              }
+            }
+          };
+
+          // Initial check
+          addButton();
+
+          // Set up a mutation observer to watch for DOM changes
+          const observer = new MutationObserver(() => {
+            setTimeout(addButton, 500);
+          });
+
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+          });
+        });
       }
-    },
+    }
 
-    _onHawkButtonClick: function (ev) {
-      ev.preventDefault();
-      alert("Hawk button clicked!");
-      // You can add more functionality here
-    },
-  });
+    // Register the component
+    HawkButton.template = xml`<div/>`;
 
-  // Add Hawk button to kanban view
-  KanbanView.include({
-    renderButtons: function () {
-      this._super.apply(this, arguments);
-      if (this.modelName === "crm.lead") {
-        var $hawkButton = $(
-          '<button class="btn btn-primary" type="button">Hawk</button>'
-        );
-        this.$buttons.find(".o-kanban-button-new").after($hawkButton);
-
-        $hawkButton.on("click", this._onHawkButtonClick.bind(this));
-      }
-    },
-
-    _onHawkButtonClick: function (ev) {
-      ev.preventDefault();
-      alert("Hawk button clicked!");
-      // You can add more functionality here
-    },
-  });
-});
+    return HawkButton;
+  }
+);
