@@ -1,20 +1,20 @@
 {
-    "name": "CRM Hawk Tuah Button",
+    "name": "My Custom Module",
     "version": "1.0",
-    "category": "Sales/CRM",
-    "summary": "Add Hawk Tuah button to CRM",
+    "category": "Custom",
+    "summary": "Custom functionality for Odoo",
     "description": """
-        This module adds a Hawk Tuah button next to the New button in CRM.
+        This module provides custom functionality for Odoo.
     """,
     "author": "Odoocker",
     "website": "https://odoocker.com",
-    "depends": ["crm"],
+    "depends": ["base"],
     "data": [
-        "views/crm_lead_views.xml",
+        "views/my_model_views.xml",
     ],
     "assets": {
         "web.assets_backend": [
-            "crm_field_rename/static/src/js/hawk_button.js",
+            "my_custom_module/static/src/js/custom_button.js",
         ],
     },
     "post_init_hook": "post_init_hook",
