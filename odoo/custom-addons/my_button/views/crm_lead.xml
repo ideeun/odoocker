@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Create action for new leads -->
+    <record id="action_new_leads_only" model="ir.actions.act_window">
+        <field name="name">Новые лиды</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('stage_id', '=', 1)]</field>
+        <field name="context">{'default_type': 'lead'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Пока нет новых лидов!
+            </p>
+        </field>
+    </record>
+    
+    <!-- Create menu item -->
+    <menuitem id="menu_new_leads_only" 
+              name="Новые лиды"
+              parent="crm.crm_menu_root" 
+              action="action_new_leads_only"
+              sequence="2"/>
+              
+    <!-- Add button to CRM form view - exact same pattern as crm_field_rename -->
+    <record id="crm_case_form_view_custom_button" model="ir.ui.view">
+        <field name="name">crm.lead.form.custom.button</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="my_custom_button_action" string="Новые лиды" type="object" class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
