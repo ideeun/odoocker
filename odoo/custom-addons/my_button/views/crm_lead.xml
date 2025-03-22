@@ -2,7 +2,7 @@
 <odoo>
     <!-- Create action for new leads -->
     <record id="action_new_leads_only" model="ir.actions.act_window">
-        <field name="name">Новые лиды</field>
+        <field name="name">New Leads</field>
         <field name="res_model">crm.lead</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="domain">[('stage_id', '=', 1)]</field>
@@ -16,7 +16,7 @@
     
     <!-- Create menu item -->
     <menuitem id="menu_new_leads_only" 
-              name="Новые лиды"
+              name="New Leads"
               parent="crm.crm_menu_root" 
               action="action_new_leads_only"
               sequence="2"/>
@@ -28,7 +28,7 @@
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
-                <button name="my_custom_button_action" string="Новые лиды" type="object" class="btn-primary"/>
+                <button name="my_custom_button_action" string="Hew Leads" type="object" class="btn-primary"/>
             </xpath>
         </field>
     </record>

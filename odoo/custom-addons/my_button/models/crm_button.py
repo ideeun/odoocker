@@ -8,7 +8,7 @@ class CRMLead(models.Model):
         """Open new leads view"""
         return {
             "type": "ir.actions.act_window",
-            "name": "Новые лиды",
+            "name": "New Leads",
             "res_model": "crm.lead",
             "view_mode": "tree,form",
             "domain": [("stage_id", "=", 1)],
