@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Изменяем список лидов (List View) -->
+        <record id="crm_lead_tree_view_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.tree.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <!-- Добавляем колонку is_pool_lead -->
+                    <field name="is_pool_lead"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Изменяем поиск (Search View) -->
+       <record id="crm_lead_search_view_inherit" model="ir.ui.view">
+    <field name="name">crm.lead.search.inherit</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+    <field name="arch" type="xml">
+        <xpath expr="//search" position="inside">
+            <!-- Фильтр только для свободных лидов -->
+            <filter name="filter_free_leads" string="Только свободные лиды" domain="[('is_pool_lead', '=', True)]"/>
+        </xpath>
+    </field>
+</record>
+
+        <!-- Изменяем карточку лида (Form View) -->
+        <record id="crm_lead_form_view_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <!-- Добавляем кнопку "Забрать лид" -->
+                    <button name="action_claim_lead" type="object" string="Забрать лид" 
+                            class="oe_highlight"
+                            modifiers="{'invisible': [('is_pool_lead', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
